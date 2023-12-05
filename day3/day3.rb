@@ -25,6 +25,8 @@ class DayThree
         syms << SchematicSym.new(m[0], m.begin(0), y)
       end
     end
+
+    set_part_numbers
   end
 
   def set_part_numbers
@@ -75,7 +77,6 @@ class DayThree
 
       runner = DayThree.new
       runner.parse_schematic(data)
-      runner.set_part_numbers
       assert(runner.nums.any? { |num| num.number == 467 && num.part == true })
       assert(runner.nums.any? { |num| num.number == 617 && num.part == true })
       assert(runner.nums.any? { |num| num.number == 664 && num.part == true })
@@ -100,7 +101,6 @@ class DayThree
 
       runner = DayThree.new
       runner.parse_schematic(data)
-      runner.set_part_numbers
       assert_equal(467835, runner.gear_ratios)
     end
 
@@ -108,7 +108,6 @@ class DayThree
       data = "..*345.."
       runner = DayThree.new
       runner.parse_schematic(data)
-      runner.set_part_numbers
       assert(runner.nums.any? { |num| num.number == 345 && num.part == true })
     end
 
@@ -116,7 +115,6 @@ class DayThree
       data = "..543*.."
       runner = DayThree.new
       runner.parse_schematic(data)
-      runner.set_part_numbers
       assert(runner.nums.any? { |num| num.number == 543 && num.part == true })
     end
 
@@ -136,7 +134,6 @@ class DayThree
       DATA
       runner = DayThree.new
       runner.parse_schematic(data)
-      runner.set_part_numbers
       assert(runner.nums.any? { |num| num.number == 3 && num.part == true })
       assert(runner.nums.any? { |num| num.number == 4 && num.part == true })
       assert(runner.nums.any? { |num| num.number == 5 && num.part == true })
@@ -159,7 +156,6 @@ class DayThree
       DATA
       runner = DayThree.new
       runner.parse_schematic(data)
-      runner.set_part_numbers
       assert(runner.nums.any? { |num| num.number == 3 && num.part == true })
       assert(runner.nums.any? { |num| num.number == 4 && num.part == true })
       assert(runner.nums.any? { |num| num.number == 5 && num.part == true })
@@ -170,7 +166,5 @@ end
 
 runner = DayThree.new
 runner.parse_schematic(File.read(File.join(__dir__, "input.dat")))
-runner.set_part_numbers
-
 puts "Part A is #{runner.part_sum}"
 puts "Part B is #{runner.gear_ratios}"
