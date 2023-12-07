@@ -5,11 +5,17 @@ require "minitest/autorun"
 class Day
   Race = Struct.new(:time, :record_distance) do
     def ways_to_win
-      (0..time).map do |time_held|
-        # quadratic equation here
-        distance = time_held * (time - time_held)
-        time_held if distance > record_distance
-      end.compact.size
+      # (0..time).map do |time_held|
+      #   # quadratic equation here
+      #   distance = time_held * (time - time_held)
+      #   time_held if distance > record_distance
+      # end.compact.size
+
+      disc = time**2 - 4 * (record_distance + 1) # d + 1: we're looking for the min int value above the record
+      root_disc = Math.sqrt(disc)
+      min_hold = (time - root_disc) / 2
+      max_hold = (time + root_disc) / 2
+      max_hold.floor - min_hold.ceil + 1
     end
   end
 
